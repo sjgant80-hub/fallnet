@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>fallnet · sovereign peer-to-peer mesh · ◊·κ=1</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{--ox:#8b1a1a;--ox-dim:#5a1010;--brass:#b8974a;--brass-dim:#7a6228;--cream:#c4bfb2;--cream-dim:#7d7a72;--void:#0b0a0f;--void-2:#14121a;--void-3:#1e1b25;--green:#4caf50;--red:#e53935}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--void);color:var(--cream);font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;font-size:14px;line-height:1.65;min-height:100vh}
+body{background-image:radial-gradient(at 0% 0%,rgba(139,26,26,.08),transparent 50%),radial-gradient(at 100% 100%,rgba(184,151,74,.05),transparent 50%)}
+a{color:var(--brass);text-decoration:none;border-bottom:1px dotted var(--brass-dim)}
+.wrap{max-width:920px;margin:0 auto;padding:60px 32px 120px}
+header{margin-bottom:48px;border-bottom:1px solid var(--ox-dim);padding-bottom:32px}
+header h1{font-size:42px;letter-spacing:6px;font-weight:400;margin-bottom:14px}
+header h1 .s{color:var(--ox);font-size:48px}
+header h1 .k{color:var(--brass)}
+header .sub{color:var(--cream-dim);letter-spacing:2px;font-size:13px;margin-bottom:18px}
+header .meta{display:flex;gap:18px;flex-wrap:wrap;font-size:11px}
+header .meta span{padding:3px 10px;border:1px solid var(--brass-dim);color:var(--brass)}
+section{margin-bottom:48px}
+h2{font-size:11px;letter-spacing:4px;color:var(--brass);text-transform:uppercase;margin-bottom:18px;border-bottom:1px solid var(--brass-dim);padding-bottom:6px}
+h3{font-size:14px;letter-spacing:2px;color:var(--cream);margin:24px 0 10px}
+p{margin-bottom:14px}.lead{font-size:18px}
+.hook{color:var(--cream-dim);font-style:italic;margin-bottom:32px;padding-left:18px;border-left:2px solid var(--brass)}
+ul{list-style:none}ul li{padding:4px 0;padding-left:20px;position:relative}ul li:before{content:"◊";position:absolute;left:0;color:var(--ox)}
+code,pre{font-family:inherit;background:var(--void-2);color:var(--brass);padding:2px 8px;border:1px solid var(--void-3)}
+pre{padding:14px 18px;margin:14px 0;overflow-x:auto;font-size:12px;line-height:1.6;border-left:2px solid var(--ox);color:var(--cream)}
+.demo{background:var(--void-2);border:1px solid var(--brass-dim);padding:24px;margin:24px 0}
+.demo input,.demo textarea,.demo button{background:var(--void);color:var(--cream);border:1px solid var(--void-3);padding:10px 14px;font-family:inherit;font-size:13px;margin:6px 0;width:100%;cursor:pointer}
+.demo textarea{min-height:80px;resize:vertical;font-size:10px;word-break:break-all}
+.demo button.go{background:var(--ox);color:#fff;border-color:var(--ox);letter-spacing:2px}
+.demo .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.demo .status{margin-top:10px;font-size:12px;color:var(--cream-dim);min-height:18px}
+.ok{color:var(--green)}.err{color:var(--red)}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:8px 12px;border:1px solid var(--void-3)}th{background:var(--void-2);color:var(--brass);letter-spacing:2px;font-size:11px;text-transform:uppercase}
+.btn{display:inline-block;padding:12px 22px;background:var(--ox);color:#fff;letter-spacing:3px;font-size:12px;border:1px solid var(--ox);text-transform:uppercase}
+.btn.dim{background:var(--void-2);color:var(--cream)}
+.cta{margin:32px 0;display:flex;gap:14px;flex-wrap:wrap}
+.seal{margin-top:80px;text-align:center;color:var(--cream-dim);font-size:11px;letter-spacing:3px}.seal .s{color:var(--ox);font-size:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+<h1><span class="s">◊</span> fallnet <span class="k">·κ=1</span></h1>
+<div class="sub">SOVEREIGN PEER-TO-PEER MESH · BROWSER-TO-BROWSER · NO SERVERS</div>
+<div class="meta"><span>WEBRTC</span><span>ZERO HOSTING</span><span>P2P SHARING</span><span>FALL-SIGNAL MESH</span><span>MIT</span></div>
+</header>
+
+<section>
+<p class="lead">Two operators running fallnet locally serve each other's tools directly. Zero centralized hosting. No GitHub. No Cloudflare. No DNS. Browser-to-browser via WebRTC.</p>
+<p class="hook">"The n=∞ move. If every estate operator runs fallnet, the network IS the estate. No takedown surface. No vendor lock. You and your guild · serving each other forever."</p>
+</section>
+
+<section>
+<h2>What this gives you</h2>
+<ul>
+<li>WebRTC datachannel mesh between sovereign-tool browsers</li>
+<li>BroadcastChannel('fall-signal') for same-origin / same-machine peer discovery</li>
+<li>Manual offer/answer flow for browser-to-browser without ANY tracker</li>
+<li>Peer announce/find: "I serve fallpost, who wants it?"</li>
+<li>Drop-in via <code>&lt;script src=...&gt;</code> · joins any tool to the mesh</li>
+</ul>
+</section>
+
+<section>
+<h2>Live · WebRTC peer handshake (manual mode)</h2>
+<div class="demo">
+<h3>◊ Peer A (initiator)</h3>
+<p style="font-size:12px;color:var(--cream-dim)">Click GENERATE OFFER. Copy the base64 blob. Send it to your friend (any channel: chat, email, paper QR).</p>
+<button class="go" id="offerBtn">GENERATE OFFER ◊</button>
+<label style="font-size:11px;color:var(--brass);letter-spacing:2px">YOUR OFFER (send to Peer B)</label>
+<textarea id="offer" readonly></textarea>
+<label style="font-size:11px;color:var(--brass);letter-spacing:2px">PASTE PEER B'S ANSWER HERE</label>
+<textarea id="answer-in"></textarea>
+<button class="go" id="completeBtn">COMPLETE CONNECTION ◊</button>
+<div class="status" id="statusA">awaiting…</div>
+</div>
+
+<div class="demo">
+<h3>◊ Peer B (responder)</h3>
+<p style="font-size:12px;color:var(--cream-dim)">Paste Peer A's offer. Click ACCEPT. Copy the answer back to A.</p>
+<label style="font-size:11px;color:var(--brass);letter-spacing:2px">PASTE PEER A'S OFFER HERE</label>
+<textarea id="offer-in"></textarea>
+<button class="go" id="acceptBtn">ACCEPT OFFER ◊</button>
+<label style="font-size:11px;color:var(--brass);letter-spacing:2px">YOUR ANSWER (send to Peer A)</label>
+<textarea id="answer" readonly></textarea>
+<div class="status" id="statusB">awaiting…</div>
+</div>
+
+<div class="demo">
+<h3>◊ Send a test message once connected</h3>
+<input id="msg" placeholder="hello peer">
+<button class="go" id="sendBtn">SEND ◊</button>
+<div class="status" id="msgLog">no messages yet</div>
+</div>
+</section>
+
+<section>
+<h2>Drop into any sovereign tool</h2>
+<pre><code>&lt;script src="https://sjgant80-hub.github.io/fallnet/fallnet-shim.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  // announce what you serve
+  await FallNet.announce('shadowcompass');
+
+  // find peers serving a tool
+  const peer = await FallNet.find('fallmap');
+  if (peer) console.log('peer has fallmap:', peer.peerId);
+
+  // raw messaging
+  FallNet.onMessage(msg => console.log('got:', msg));
+&lt;/script&gt;</code></pre>
+</section>
+
+<section>
+<h2>Why this exists · the n=∞ defense</h2>
+<table>
+<thead><tr><th>Threat</th><th>fallnet response</th></tr></thead>
+<tbody>
+<tr><td>All CDNs and GitHub Pages dark</td><td class="ok">Browser-to-browser still works · operators serve each other</td></tr>
+<tr><td>National firewall blocks all hosting</td><td class="ok">WebRTC P2P bypasses firewall · STUN servers in 100+ countries</td></tr>
+<tr><td>Trackers / signaling servers blocked</td><td class="ok">Manual offer/answer via paper QR · works offline</td></tr>
+<tr><td>"Air-gapped" operator at an event</td><td class="ok">Local-only via BroadcastChannel · same-machine multi-tab mesh</td></tr>
+<tr><td>Need to verify a peer's tool is authentic</td><td class="ok">Combine with <a href="https://sjgant80-hub.github.io/fallshield/">fallshield</a> · every announce can be Ed25519 signed</td></tr>
+</tbody>
+</table>
+</section>
+
+<section>
+<h2>The complete defensive stack</h2>
+<ul>
+<li><a href="https://sjgant80-hub.github.io/fallvault/">fallvault</a> · encrypted laptop backup</li>
+<li><a href="https://sjgant80-hub.github.io/fallcompass/">fallcompass</a> · 8-provider LLM cascade</li>
+<li><a href="https://sjgant80-hub.github.io/fallmirror/">fallmirror</a> · multi-host repo mirroring</li>
+<li><a href="https://sjgant80-hub.github.io/fallshield/">fallshield</a> · Ed25519 identity signing</li>
+<li><a href="https://sjgant80-hub.github.io/fallescape/">fallescape</a> · 20-min emergency recovery</li>
+<li><a href="https://sjgant80-hub.github.io/fallpay/">fallpay</a> · multi-rail signed receipts</li>
+<li><a href="https://sjgant80-hub.github.io/fallcdn/">fallcdn</a> · serve from your own laptop</li>
+<li><strong>fallnet · peer-to-peer mesh · the network IS the estate</strong></li>
+<li><a href="https://sjgant80-hub.github.io/fallonion/">fallonion</a> · Tor hidden service for censored regions</li>
+</ul>
+</section>
+
+<section>
+<h2>License</h2>
+<p>MIT · part of <a href="https://www.ai-nativesolutions.com">AI Native Solutions</a> · <a href="https://github.com/sjgant80-hub/fallnet">source</a></p>
+</section>
+
+<div class="cta">
+  <a class="btn" href="https://github.com/sjgant80-hub/fallnet">VIEW ON GITHUB</a>
+  <a class="btn dim" href="https://www.ai-nativesolutions.com">FULL ESTATE</a>
+</div>
+
+<div class="seal"><span class="s">◊·κ=1</span> &nbsp; prime 313 &nbsp; v20.1 · phi=1.618 · kappa=0.618 &nbsp; the mesh compounds</div>
+</div>
+
+<script src="./fallnet-shim.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+let peerAState = null;
+
+$('#offerBtn').onclick = async () => {
+  $('#statusA').textContent = 'generating offer + gathering ICE…';
+  try {
+    peerAState = await window.FallNet.createOffer();
+    $('#offer').value = peerAState.sdp;
+    $('#statusA').innerHTML = '<span class="ok">✓ offer ready · copy & send to Peer B</span>';
+  } catch (e) { $('#statusA').innerHTML = '<span class="err">' + e.message + '</span>'; }
+};
+$('#acceptBtn').onclick = async () => {
+  const off = $('#offer-in').value.trim();
+  if (!off) { $('#statusB').innerHTML = '<span class="err">paste offer first</span>'; return; }
+  $('#statusB').textContent = 'accepting + generating answer…';
+  try {
+    const r = await window.FallNet.acceptOffer(off);
+    $('#answer').value = r.sdp;
+    $('#statusB').innerHTML = '<span class="ok">✓ answer ready · copy & send back to Peer A</span>';
+  } catch (e) { $('#statusB').innerHTML = '<span class="err">' + e.message + '</span>'; }
+};
+$('#completeBtn').onclick = async () => {
+  const ans = $('#answer-in').value.trim();
+  if (!ans || !peerAState) { $('#statusA').innerHTML = '<span class="err">need offer + answer</span>'; return; }
+  try {
+    await window.FallNet.completeOffer(peerAState.pc, ans);
+    $('#statusA').innerHTML = '<span class="ok">✓ connection established · check Peer B for "open"</span>';
+  } catch (e) { $('#statusA').innerHTML = '<span class="err">' + e.message + '</span>'; }
+};
+$('#sendBtn').onclick = () => {
+  const peerList = window.FallNet.peers();
+  if (!peerList.length) { $('#msgLog').innerHTML = '<span class="err">no peers connected yet</span>'; return; }
+  const ok = window.FallNet.send(peerList[0].id, $('#msg').value);
+  $('#msgLog').innerHTML = ok ? '<span class="ok">✓ sent · peer should log it</span>' : '<span class="err">channel not ready</span>';
+};
+window.FallNet.onMessage(msg => {
+  $('#msgLog').innerHTML = '<span class="ok">◊ received:</span> ' + JSON.stringify(msg).slice(0, 200);
+});
+</script>
+</body>
+</html>
